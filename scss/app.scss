@@ -1,0 +1,236 @@
+@import 'variables';
+@import 'mixins';
+
+html {
+    @include box-sizing(border-box);
+}
+
+*,
+*:after,
+*:before {
+    @include box-sizing(inherit);
+}
+
+body {
+    background-color: $negro;
+    font-family: $fuentePrincipal;
+    color:$gris2;
+    @include tablet {
+        background-color: unset;
+        background-image: url(../img/bg.jpg);
+        background-repeat: no-repeat;
+        background-size: cover;
+        background-position: bottom center;
+    }
+}
+
+a {
+    color: $gris2;
+    text-decoration: none; 
+    &:hover{
+        text-decoration: underline;
+    }
+}
+
+.contenedor {
+    width: 90%;
+    margin: 0 auto;
+}
+
+.alerta {
+   color: $secundario;
+   display: block;
+   margin-bottom: .4rem;
+   padding: .2rem;
+   font-size: .8rem;
+   text-align: center;
+}
+
+/*Esto en caso que la clase en el input sea no valido (validacionJS) */
+input.no-valido {
+    border-bottom: 2px solid $secundario!important;
+}
+
+.logotipo{
+    margin-top: .5rem;
+    max-width: 180px;
+
+    @include tablet {
+        margin-top: 1%;
+        margin-left: 2%;
+    }
+}
+
+.formulario-login {
+    @include tablet {
+        background-color: rgba(0,0,0, 0.85);
+        max-width: 400px;
+        padding:  2rem 4rem;
+        margin: 1rem auto 4rem auto;
+    }
+}
+
+form {
+
+    legend {
+        color: $blanco;
+        font-size: 2rem;
+        margin: 2rem 0;
+        font-weight: bold;
+    }
+
+
+    .campo {
+        display: flex;
+        position: relative; /*3. se le pone relative al padre para q se ubique*/
+        margin-bottom: .8rem;
+
+        span{
+            position: absolute;
+            right: 1rem;
+            top: 1rem;
+            text-transform: uppercase;
+            font-size: .9rem;
+            &:hover {
+                cursor: pointer;
+            }
+
+            @include tablet {
+                font-size: .7rem;
+            }
+        }
+
+        label{
+            position: absolute; /*2. por ello se saca al label de su posicion y da la senscion de estar encima del input*/
+            top: 1.1rem;
+            left: 1rem;
+            transition: font-size .2s ease, top .2s ease;
+
+            /*Esto para la comprobacion de formulario Js,(en caso de que la clase sea valido)*/
+
+            &.valido {
+                font-size: .6rem;
+                top: .5rem;
+            }
+        }
+
+        input {
+            flex: 1; /*1. con esta opcion no termina de crecer en el contenedor porque esta el label no se lo permite*/
+            padding: 1.3rem 1rem .7rem 1rem;
+            border: none; /*los input tienen borde por default*/
+            background-color: $gris;
+            border-radius: $radius;
+            color: $blanco;
+
+            &:focus {
+                background-color: $gris3;
+                 outline: none; /*trae por default un borde azul*/
+
+                 +label {
+                     font-size: .6rem;
+                     top: .5rem
+                 }
+
+            }
+
+        }
+    }
+
+    .submit {
+        display: flex;
+        margin-top: 2rem;
+
+        input[type="submit"]{
+            @include boton($primario, $blanco);
+            &:hover{
+                cursor: pointer;
+            }
+        }
+
+    }
+
+    .acciones{
+        display: flex;
+        justify-content: space-between;
+        padding: .5rem 0;
+        margin: .5rem 0 8rem 0;
+
+        label, a {
+            font-size: .8rem;
+            text-decoration: none;
+        }
+    }
+}
+
+.contenido-inferior {
+    padding-bottom: 2rem;
+    @include tablet {
+        padding-bottom: 0;
+    }
+
+    a {
+        font-size: .8rem;  
+    }
+
+    .nuevo-usuario{
+        font-size: 1rem;
+        margin-top: 1rem;
+        display: flex;
+        
+
+        a {
+            font-size: .9rem;
+            color: $blanco;
+            margin-left: .5rem;
+        }
+    }
+}
+
+.site-footer {
+    border-top: 1px solid $gris2;
+    padding: 2rem 0 4rem 0 ;
+    @include tablet {
+        border-top: unset;
+        background-color: rgba(0,0,0, 0.85);
+        padding: 1rem 0 3rem 0;
+    }
+
+    .contenedor {
+        @include tablet {
+            max-width: 50%;
+        }
+    }
+
+    .menu-footer{
+        display: flex;
+        justify-content: space-between;
+        flex-wrap: wrap;
+        @include tablet {
+            max-width: 60%;
+        }
+
+        a{
+            flex: 0 0 auto;
+            font-size: .8rem;
+            margin-right: 2rem;
+            padding: .5rem 0;
+
+            &:last-of-type{/*indica el ultimo enlace*/
+                margin-right: 0;
+            }
+        }
+    }
+
+    select {
+        /*para que permita darle estilo a un select hay que desactivarle apapearance*/
+        appearance: none;
+        padding: 1rem 3rem;
+        border: 1px solid $gris3;
+        border-radius: $radius;
+        font-size: .8rem;
+        background-color: $negro;
+        color: $gris2;
+        margin-top: 2rem;
+    }
+}
+
